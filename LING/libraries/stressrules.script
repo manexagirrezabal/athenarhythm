@@ -1,0 +1,78 @@
+#Matt Gordon UCSB approach
+
+#Delahunty and Garvey approach
+
+define C [b|d|f|g|h|k|l|m|n|p|r|s|t|v|z|T|S|C|G|D|Z|J|y|w];
+define V [%^|%@ |%| |I|Q|q|O|e|o|Y|c|X|L|E|U|i|u|a|W|R|x|N];
+
+#I've to complete this list! R, L, M --> Not vowels!
+define tV [ a | e | i | o | u | y ] ; #Tense vowels
+define lV [ A | E | I | O | U | x | %^ | Y ] ; #Lax vowels
+
+#source syllphon.script
+#pop
+
+#define C [Obs | Nas | Liq | Gli];
+
+#define Nuclei V (V)
+
+#define heavys [ Onset Nucleus C+ | Onset tV ];
+#define lights Onset Nucleus ;
+
+define heavys [ (C) (C) tV | (C) (C) V C+ ] .o. ?* - [ ?* %' ?*];
+define lights (C) (C) V .o. ?* - [ ?* %' ?*];
+
+define opensylllax (C) (C) lV .o. ?* - [ ?* %' ?*]; # Open syllable (No coda) and with a lax vowel
+
+define syll [lights | heavys] .o. ?* - [ ?* %' ?*] ;
+
+define firstRule [..] @-> ' || _ syll %. lights %. syll .#. ; #If penult is light, antepenult is stressed
+define secondRule [..] @-> ' || syll %. _ heavys %. syll .#. ; #If penult is heavy, it takes stress
+#define thirdRule [..] @-> ' || .#. opensylllax %. _ syll .#. ;
+#define thirdRuleComp [..] @-> ' || .#. _ opensylllax %. syll .#. ;
+define thirdRuleComp ?* ;
+define thirdRule ?* ;
+define thirdRule [..] @-> ' || .#. _ syll %. syll .#. ; #disyllables have initial stress;
+define forthRule [..] @-> ' || .#. _ syll .#. ; #monosyllables have initial stress;
+
+define cleanUp %' -> 0 || %' [ C | V ]* _ ;
+
+regex secondRule .o. firstRule .o. thirdRule .o. thirdRuleComp .o. forthRule .o. cleanUp ;
+
+save stack stressrules.fst
+
+#regex firstRule ;
+#regex secondRule ;
+
+down rE.J|.mxnt
+down k@.nx.dx
+down x.mE.rI.kx
+down @k.s|.d|nt
+down @.nx.mL
+down k@.px.tL
+
+#regex secondRule ;
+
+down x.pEn.dIks
+down dY.x.lEk.tL
+down ka.lxm.bxs
+down kan.sN.@n.tL
+down I.JEk.tIv
+down s|s.pEn.C|n
+
+down In.trx.d^k.S|n
+
+
+#regex thirdRuleComp ;
+down tE.n|s
+down kE.Cxp
+down ^.nyxn
+down pro.t|n
+down mot
+down d^k
+down spat
+down o.klx.ho.mx
+down ar.J|n.ti.nx
+down sIs.tX
+down x.kwYr
+down e.kX

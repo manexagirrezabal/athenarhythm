@@ -1,0 +1,107 @@
+###########################
+# English syllabification #
+# Mans Hulden 20050509    #
+###########################
+
+define Cons [b|d|f|g|h|k|l|m|n|p|r|s|t|v|z|T|S|C|G|D|Z|J|y|w];
+define Vow [%^|%@ |%| |I|Q|q|O|e|o|Y|c|X|L|E|U|i|u|a|W|R|x|N];
+define Gli [y|w];
+define Liq [r|l];
+define Nas [m|n|G];
+define LabFri [f|v];
+define Fri [S|T|D|Z|z|C|J];
+define CorSto [t|d];
+define NonCorSto [b|g|k|p];
+define Stop [NonCorSto|CorSto];
+define BD ["." | .#.];
+
+define SSP [
+(
+[h] ([Gli]) |
+[s ([ [k] ([r]|[Gli]) ] | [t] ([r]|[y]) | [[p] ([Liq]|[y])] | [[Nas - G - n]|[l]|[Gli]]) ] |
+[[k|g] ([[Liq]|[Gli]]) ] |
+[[p|b] ([[Liq]|[Gli]]) ] |
+[CorSto ([r]|[Gli])] |
+[Fri] |
+[S r] |              
+[T [[Gli]|[r]]] |    
+[ [LabFri] [[Liq]|[y]] ] |
+[LabFri] |
+[Nas] |
+[Nas] ([Gli]) |
+[Gli] |
+[Liq] 
+)
+Vow
+([Cons]) ([Cons])
+];
+
+define WFRule [[SSP "."]* SSP] ;
+define SSPRule [SSP @> ... "." || _ SSP];
+
+define SRule  [[s -> ... "." || ([[Cons]|[(Stop) r]]) [Vow - x - i] _ Cons+ Vow]];
+define YUrule [Nas -> ... "." || [Vow - x] _ y ];
+define MorphIgnore ["." -> 0];
+
+define Syllabify [
+   [ [[Cons]|[Vow]|{.}]* .o. 
+        SRule
+         .o.
+        YUrule
+         .o.
+       SSPRule                      #
+         .o.                        #Comment away these lines for excluding morpheme boundaries
+        WFRule                      #pre-marked with "."
+                 ]
+          .P.                       #
+[MorphIgnore .o. SRule .o. SSPRule] #
+];#
+
+define Words [
+{@kwIEs}	| #acquiesce
+{@spEn} 	| #aspen
+{@sPN} 		| #aspen (syllabic)
+{xtroSxs}	| #atrocious
+{@trxfi} 	| #atrophy
+{kamptrolxr}	| #comptroller
+{kxmpyutxr}	| #computer
+{kcrnyxkopIx}	| #cornucopia
+{dElyuJ}	| #deluge
+{dIsfaGkSxnL}	| #dysfunctional
+{EskwYr}	| #esquire
+{Ist@blISmEnt}	| #establishment
+{Eksklem}	| #exclaim
+{Ikskl@mxtcri}	| #exclamatory
+{Eksplen}	| #explain
+{EkskwIzxt}	| #exquisite
+{Ekstrx}	| #extra
+{formyUlx}	| #formula
+{JEsteSN}	| #gestation
+{harpsxkcrd}	| #harpsichord
+{IGklIG}	| #inkling
+{mxnIpyUlet}	| #manipulate
+{m@nyuL}	| #manual
+{m@trxs}	| #mattress
+{mEtro}		| #metro
+{mIsxsIpi}	| #Mississippi
+{mIstr^st}	| #mistrust
+{p@lxmpsEst}	| #palimpsest
+{tEnyuxs}	| #tenuous
+{tEksCxr}	| #texture
+{transkrYb}	| #transcribe
+{transpl@nt}	| #transplant
+{trans.pl@nt}	| #trans.plant
+{yunyxn}	| #union
+{vEnyu}		| #venue
+{vEnuSN}	| #Venusian
+{wIskansxn}	| #Wisconsin (as pronounced outside Wisconsin predicts aspirated k)
+{wxskansxn}	| #Wisconsin (as pronounced in Wisconsin predicts non-aspirated k)
+{supRk@lxfr@JxlIstIk.Ekspi@lxdoSxs}| #supercalifragilistic.expialidocious
+{supRk@lxfr@JxlIstIkEkspi@lxdoSxs}]; #supercalifragilisticexpialidocious
+
+
+#regex Words .o. Syllabify;
+regex Syllabify;
+save stack syllabify-shortest.fst
+print lower-words
+

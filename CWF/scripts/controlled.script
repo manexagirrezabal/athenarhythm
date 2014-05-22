@@ -1,0 +1,43 @@
+#ENGLISH
+#controlled
+#pop #pop DICT
+
+regex [BEFORECHANGE .o. VowChaBEF .o. AFTERCHANGE];
+#save stack independentFST/VBEF.fst
+#pop
+
+regex [BEFORECHANGE .o. ConChaBEF .o. AFTERCHANGE];
+#save stack independentFST/CBEF.fst
+#pop
+
+regex [BEFORECHANGE .o. VowChaBEF .o. VowChaBEF .o. AFTERCHANGE];
+#save stack independentFST/VVBEF.fst
+#pop
+
+regex [BEFORECHANGE .o. [[VowChaBEF .o. ConChaBEF] | [ConChaBEF .o. VowChaBEF]] .o. AFTERCHANGE];
+#save stack independentFST/CVorVCBEF.fst
+#pop
+
+regex [BEFORECHANGE .o. ConChaBEF .o. ConChaBEF .o. AFTERCHANGE];
+#save stack independentFST/CCBEF.fst
+#pop
+
+regex [BEFORECHANGE .o. VowChaAFT .o. AFTERCHANGE];
+#save stack independentFST/VAFT.fst
+#pop
+
+regex [BEFORECHANGE .o. ConChaAFT .o. AFTERCHANGE];
+#save stack independentFST/CAFT.fst
+#pop
+
+regex [BEFORECHANGE .o. VowChaAFT .o. VowChaAFT .o. AFTERCHANGE];
+#save stack independentFST/VVAFT.fst
+#pop
+
+regex [BEFORECHANGE .o. [[VowChaAFT .o. ConChaAFT] | [ConChaAFT .o. VowChaAFT]] .o. AFTERCHANGE];
+#save stack independentFST/CVorVCAFT.fst
+#pop
+
+regex [BEFORECHANGE .o. ConChaAFT .o. ConChaAFT .o. AFTERCHANGE];
+#save stack independentFST/CCAFT.fst
+#pop

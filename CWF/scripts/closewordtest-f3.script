@@ -1,0 +1,44 @@
+define V [a|e|i|o|u|y];
+define C [b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|t|v|w|x|z];
+
+#define DICT [{debate}|{dog}|{mouse}];
+define DICT @txt"../corpora/allWords.txt-f3"; #TRAIN WITH THIS DICTIONARY
+
+##CONTROLLED PART START
+define C2CcondBEF ?* [C:C-?] ?* %| \%|*;
+define C20condBEF ?* [C:0] ?* %| \%|*;
+define 02CcondBEF ?* [0:C] ?* %| \%|*;
+define ConChaBEF [C2CcondBEF | C20condBEF | 02CcondBEF] ;
+
+define V2VcondBEF ?* [V:V-?] ?* %| \%|*;
+define V20condBEF ?* [V:0] ?* %| \%|*;
+define 02VcondBEF ?* [0:V] ?* %| \%|*;
+define VowChaBEF [V2VcondBEF | V20condBEF | 02VcondBEF];
+
+define C2CcondAFT \%|* %| ?* [C:C-?] ?*;
+define C20condAFT \%|* %| ?* [C:0] ?*;
+define 02CcondAFT \%|* %| ?* [0:C] ?*;
+define ConChaAFT [C2CcondAFT | C20condAFT | 02CcondAFT] ;
+
+define V2VcondAFT \%|* %| ?* [V:V-?] ?*;
+define V20condAFT \%|* %| ?* [V:0] ?*;
+define 02VcondAFT \%|* %| ?* [0:V] ?*;
+define VowChaAFT [V2VcondAFT | V20condAFT | 02VcondAFT];
+##CONTROLLED PART END
+
+
+define INSERTVERTICALBAR [..] @-> %| || _ (C) (V)+ C+ (V) .#. ;
+define CLEANVERTICALBAR %| -> 0;
+define VERTICALBARFILTER ~$%|;
+define CLEANFIRSTVERTICALBARS %| -> 0 || %| ?* _ ;
+
+define BEFORECHANGE VERTICALBARFILTER .o. INSERTVERTICALBAR .o. CLEANFIRSTVERTICALBARS;
+define AFTERCHANGE CLEANVERTICALBAR .o. DICT ;
+
+regex DICT ;
+
+source controlled-f3.script
+
+#save stack closewordtest-f0.fst
+
+
