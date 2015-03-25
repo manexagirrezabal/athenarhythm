@@ -10,7 +10,7 @@ if (solverType != 'N') and (solverType != 'L'):
     print "Error! You can only use Linear (L) or non-linear (N) solvers!"
     exit()
 
-optionsN = '-s 0 -t 2 -c 2048 -g 0.00390625'
+optionsN = '-s 0 -t 2 -c 1024 -g 0.0078125'
 optionsL = '-s 1'
 
 print corpusFile, numfeats, modelFile, optionsL, optionsN

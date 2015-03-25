@@ -39,7 +39,7 @@ if (m != 0):
             res=[cl[stPatt]]*1
             print res
             if (solverType == 'N'):
-                p_labels, p_acc, p_val = svm_predict(res, f, m, '-q')
+                p_labels, p_acc, p_val = svm_predict(res, f, m, '')
             else:
                 p_labels, p_acc, p_val = predict(res, f, m, '')
             predicted = invcl[p_labels[0]]
