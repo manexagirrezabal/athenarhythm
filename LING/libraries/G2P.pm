@@ -1,6 +1,7 @@
 package G2P;
 my $model = '/Users/manex/phonetisaurus/phonetisaurus-0.7.5/script/toy/new.fst'; #The model that we will use to do the G2P conversion
-my $phonetisaurusDir='~/phonetisaurus/phonetisaurus-0.7.5/'; #Phonetisaurus program location. Empty if it is in the $PATH variable
+my $model = '/sc01a4/users/maguirrezaba008/athenarhythm/toy.fst';
+my $phonetisaurusDir=''; #Phonetisaurus program location. Empty if it is in the $PATH variable
 
 
 
@@ -14,7 +15,7 @@ foreach my $word (@input) {
 }
 close(TMPFILE);
 
-my $res = `$phonetisaurusDirphonetisaurus-g2p --model=$model --isfile --input=tmp.txt`;
+my $res = `${phonetisaurusDir}phonetisaurus-g2p --model=$model --isfile --input=tmp.txt`;
 
 chomp($res);
 my @res = split(/\n/, $res);
