@@ -10,9 +10,9 @@ Here you can see a step by step explanation of how to train the G2P model in pho
 
 `mkdir tmp`
 
-3.- Convert the dataset to the format that the phonetisaurus aligner accepts.
+3.- Convert the dataset to the format that the phonetisaurus aligner accepts. (NEW!!) Convert also the '|' character to e.g. '=', as there are conflicts with it.
 
-`cat newdic | perl newdic2phonetiaurus.pl > tmp/toy.train`
+`cat newdic | sed 's/|/=/g;' | perl newdic2phonetiaurus.pl > tmp/toy.train`
 
 4.- Align graphemes and phonemes.
 
@@ -32,8 +32,11 @@ Here you can see a step by step explanation of how to train the G2P model in pho
 
 #HOW TO USE THE TRAINED MODEL
 
-`phonetisaurus-g2p --model=newdicg2p.fst --input="abjection"`
+`phonetisaurus-g2p --model=newdicg2p.fst --input="abjection" | sed 's/=/|/g;s/\ //g'`
 
+#CLEAN OUTPUT
+
+`phonetisaurus-g2p --model=newdicg2p.fst --input="abjection" | cut -f3 | sed 's/=/|/g;s/\ //g'`
 
 
 ##References
