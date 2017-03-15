@@ -1,4 +1,4 @@
-##Introduction
+## Introduction
 
 In this page you will see how to use LIBSVM and LIBLINEAR in a very easy way to train a model, in our case, for stress location prediction.
 Steps
@@ -25,10 +25,10 @@ Great! The model has been created. Now we can make predictions based on the mode
 
 ...
 
-##Making predictions
+## Making predictions
 
 `python predict.py [N|L] svmCorpus-FS1.model`
 
-##Evaluation
+## Evaluation
 
 `cat testCorpus | python predict.py [N|L] svmCorpus-FS1.model`
