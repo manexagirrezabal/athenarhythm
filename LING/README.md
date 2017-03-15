@@ -1,4 +1,4 @@
-#HOW TO TRAIN THE MODEL
+# HOW TO TRAIN THE MODEL
 
 Here you can see a step by step explanation of how to train the G2P model in phonetisaurus (Extended from a tutorial in FSMNLP 2012):
 
@@ -30,15 +30,15 @@ Here you can see a step by step explanation of how to train the G2P model in pho
 
 `rm tmp/*; rmdir tmp; rm newdic`
 
-#HOW TO USE THE TRAINED MODEL
+# HOW TO USE THE TRAINED MODEL
 
 `phonetisaurus-g2p --model=newdicg2p.fst --input="abjection" | sed 's/=/|/g;s/\ //g'`
 
-#CLEAN OUTPUT
+# CLEAN OUTPUT
 
 `phonetisaurus-g2p --model=newdicg2p.fst --input="abjection" | cut -f3 | sed 's/=/|/g;s/\ //g'`
 
 
-##References
+## References
 
 T. J. Sejnowski and C. R. Rosenberg, “Parallel networks that learn to pronounce English text,” Complex systems, vol. 1, no. 1, pp. 145–168, 1987.
