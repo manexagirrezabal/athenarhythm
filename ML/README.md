@@ -27,7 +27,7 @@ Great! The model has been created. Now we can make predictions based on the mode
 
 ## Making predictions
 
-`python predict.py [N|L] svmCorpus-FS1.model`
+`python stress.py [N|L] svmCorpus-FS1.model`
 
 ## Evaluation
 
