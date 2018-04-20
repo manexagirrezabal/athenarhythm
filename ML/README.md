@@ -18,7 +18,7 @@ After preparing our corpus, we can just start training our models using the corp
 
 `python train.py [N|L] svmCorpus-FS1.SVM 0 svmCorpus-FS1.model`
 
-Great! The model has been created. Now we can make predictions based on the models, using the predict.py program. This program takes two arguments:
+Great! The model has been created. Now we can make predictions based on the models, using the stress.py program. This program takes two arguments:
 
 - Linear or non-linear SVM
 - Model file got from the training
